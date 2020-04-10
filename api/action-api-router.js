@@ -5,7 +5,7 @@ const theRouter = express.Router();
 
 theRouter.use(express.json());
 
-theRouter.post("/projects/:id/actions", (req, res, next) => {
+theRouter.post("/actions", (req, res, next) => {
   projectsAction_db.insert(req.body)
     .then(project => {
       res.status(201).json(project);
@@ -14,18 +14,18 @@ theRouter.post("/projects/:id/actions", (req, res, next) => {
 });
 
 theRouter.delete("/projects/:id/actions/:theId", (req, res) => {
-  projectsAction_db.remove(req.params.theId)
-    .then(count => {
-      if (count) {
-        res.status(204).end();
-      } else {
-        res.status(404).json({ message: "not found" });
-      }
-    })
-    .catch(error => next(error));
-});
-
-    theRouter.put('/projects/:id/actions/:theId', (req, res)=>{
+    projectsAction_db.remove(req.params.theId)
+      .then(count => {
+        if (count) {
+          res.status(204).end();
+        } else {
+          res.status(404).json({ message: "not found" });
+        }
+      })
+      .catch(error => next(error));
+  });
+  
+    theRouter.put('/actions/:theId', (req, res)=>{
         const changes = req.body;
         projectsAction_db.update(req.params.theId, changes)
         .then(post =>{
