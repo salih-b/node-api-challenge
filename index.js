@@ -12,3 +12,12 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+require("dotenv").config(); 
+
+const server = require("./api/server.js");
+
+// make the port dynamic, so heroku can assign one
+const port = process.env.PORT || 6000;
+server.listen(port, () => {
+  console.log(`\n*** Server listening on localhost:${port} ***\n`);
+});
